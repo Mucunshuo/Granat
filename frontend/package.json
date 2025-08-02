@@ -1,0 +1,21 @@
+{
+  "name": "grpo-chat-frontend",
+  "version": "1.0.0",
+  "description": "GRPO微调模型聊天前端",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 3000",
+    "dev": "python -m http.server 3000",
+    "build": "echo '静态文件构建完成'"
+  },
+  "keywords": [
+    "chat",
+    "ai",
+    "grpo",
+    "qwen"
+  ],
+  "author": "GRPO Team",
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {}
+} 

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>卷毛小狗AI助手 - GRPO微调模型</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="dog-avatar">
+                        <div class="dog-face">
+                            <div class="dog-ears">
+                                <div class="ear left-ear"></div>
+                                <div class="ear right-ear"></div>
+                            </div>
+                            <div class="dog-eyes">
+                                <div class="eye left-eye"></div>
+                                <div class="eye right-eye"></div>
+                            </div>
+                            <div class="dog-nose"></div>
+                            <div class="dog-mouth"></div>
+                        </div>
+                    </div>
+                    <h1>卷毛小狗AI助手</h1>
+                </div>
+                <div class="status">
+                    <span class="status-dot" id="statusDot"></span>
+                    <span class="status-text" id="statusText">连接中...</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- 聊天区域 -->
+        <main class="chat-container">
+            <div class="chat-messages" id="chatMessages">
+                <!-- 欢迎消息 -->
+                <div class="message bot-message">
+                    <div class="message-avatar">
+                        <div class="mini-dog-avatar">
+                            <div class="mini-dog-face">
+                                <div class="mini-dog-eyes">
+                                    <div class="mini-eye"></div>
+                                    <div class="mini-eye"></div>
+                                </div>
+                                <div class="mini-dog-nose"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="message-content">
+                        <div class="message-text">
+                            汪汪！我是你的卷毛小狗AI助手 🐕 我已经通过GRPO方法在s1K-1.1数据集上进行了微调，现在可以和你聊天啦！有什么问题都可以问我哦～
+                        </div>
+                        <div class="message-time" id="welcomeTime"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 输入区域 -->
+            <div class="input-container">
+                <div class="input-wrapper">
+                    <textarea 
+                        id="messageInput" 
+                        class="message-input" 
+                        placeholder="输入你的问题..."
+                        rows="1"
+                        maxlength="1000"
+                    ></textarea>
+                    <button id="sendButton" class="send-button" disabled>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="22" y1="2" x2="11" y2="13"></line>
+                            <polygon points="22,2 15,22 11,13 2,9"></polygon>
+                        </svg>
+                    </button>
+                </div>
+                <div class="input-footer">
+                    <span class="char-count" id="charCount">0/1000</span>
+                    <button id="clearButton" class="clear-button">清空对话</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- 加载动画 -->
+        <div class="loading-overlay" id="loadingOverlay">
+            <div class="loading-content">
+                <div class="loading-dog">
+                    <div class="loading-dog-body">
+                        <div class="loading-dog-head">
+                            <div class="loading-dog-ears">
+                                <div class="loading-ear"></div>
+                                <div class="loading-ear"></div>
+                            </div>
+                            <div class="loading-dog-face">
+                                <div class="loading-dog-eyes">
+                                    <div class="loading-eye"></div>
+                                    <div class="loading-eye"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="loading-dog-tail"></div>
+                    </div>
+                </div>
+                <div class="loading-text">小狗正在思考中...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 错误提示 -->
+    <div class="error-toast" id="errorToast">
+        <div class="error-content">
+            <span class="error-icon">⚠️</span>
+            <span class="error-message" id="errorMessage"></span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 

@@ -1,0 +1,651 @@
+/* 全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #333;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+}
+
+/* 头部样式 */
+.header {
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+    padding: 1rem 2rem;
+    border-bottom: 3px solid #ff6b9d;
+    position: relative;
+    overflow: hidden;
+}
+
+.header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.3)"/><circle cx="80" cy="40" r="1.5" fill="rgba(255,255,255,0.2)"/><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.4)"/></svg>');
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo h1 {
+    color: #fff;
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* 小狗头像样式 */
+.dog-avatar {
+    width: 60px;
+    height: 60px;
+    position: relative;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+.dog-face {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #8B4513, #A0522D);
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.dog-ears {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px;
+}
+
+.ear {
+    width: 20px;
+    height: 25px;
+    background: linear-gradient(135deg, #654321, #8B4513);
+    border-radius: 50% 50% 0 0;
+    position: relative;
+}
+
+.ear::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 10px;
+    height: 15px;
+    background: #D2691E;
+    border-radius: 50% 50% 0 0;
+}
+
+.dog-eyes {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+}
+
+.eye {
+    width: 12px;
+    height: 12px;
+    background: #000;
+    border-radius: 50%;
+    position: relative;
+    animation: blink 3s infinite;
+}
+
+.eye::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 4px;
+    height: 4px;
+    background: #fff;
+    border-radius: 50%;
+}
+
+@keyframes blink {
+    0%, 90%, 100% { transform: scaleY(1); }
+    95% { transform: scaleY(0.1); }
+}
+
+.dog-nose {
+    position: absolute;
+    top: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 6px;
+    background: #000;
+    border-radius: 50%;
+}
+
+.dog-mouth {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 10px;
+    border: 2px solid #000;
+    border-top: none;
+    border-radius: 0 0 20px 20px;
+}
+
+/* 状态指示器 */
+.status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.status-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ff6b6b;
+    animation: pulse 2s infinite;
+}
+
+.status-dot.connected {
+    background: #51cf66;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.status-text {
+    color: #fff;
+    font-weight: 500;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* 聊天容器 */
+.chat-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.chat-messages::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
+
+/* 消息样式 */
+.message {
+    display: flex;
+    margin-bottom: 1rem;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.user-message {
+    justify-content: flex-end;
+}
+
+.bot-message {
+    justify-content: flex-start;
+}
+
+.message-avatar {
+    width: 40px;
+    height: 40px;
+    margin: 0 0.5rem;
+    flex-shrink: 0;
+}
+
+.mini-dog-avatar {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #8B4513, #A0522D);
+    border-radius: 50%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mini-dog-face {
+    width: 80%;
+    height: 80%;
+    position: relative;
+}
+
+.mini-dog-eyes {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    gap: 8px;
+}
+
+.mini-eye {
+    width: 6px;
+    height: 6px;
+    background: #000;
+    border-radius: 50%;
+}
+
+.mini-dog-nose {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 3px;
+    background: #000;
+    border-radius: 50%;
+}
+
+.message-content {
+    max-width: 70%;
+    background: #fff;
+    padding: 1rem;
+    border-radius: 18px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.user-message .message-content {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+}
+
+.bot-message .message-content {
+    background: #fff;
+    border: 2px solid #ff9a9e;
+}
+
+.message-text {
+    line-height: 1.6;
+    word-wrap: break-word;
+}
+
+.message-time {
+    font-size: 0.75rem;
+    color: #999;
+    margin-top: 0.5rem;
+    text-align: right;
+}
+
+.user-message .message-time {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* 输入区域 */
+.input-container {
+    background: #fff;
+    padding: 1rem;
+    border-top: 2px solid #ff9a9e;
+}
+
+.input-wrapper {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-end;
+}
+
+.message-input {
+    flex: 1;
+    border: 2px solid #e0e0e0;
+    border-radius: 20px;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    font-family: inherit;
+    resize: none;
+    outline: none;
+    transition: border-color 0.3s ease;
+    max-height: 120px;
+    min-height: 44px;
+}
+
+.message-input:focus {
+    border-color: #ff9a9e;
+}
+
+.message-input::placeholder {
+    color: #999;
+}
+
+.send-button {
+    width: 44px;
+    height: 44px;
+    border: none;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff9a9e, #fecfef);
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(255, 154, 158, 0.3);
+}
+
+.send-button:hover:not(:disabled) {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(255, 154, 158, 0.4);
+}
+
+.send-button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.input-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+.char-count {
+    font-size: 0.8rem;
+    color: #999;
+}
+
+.clear-button {
+    background: none;
+    border: 1px solid #ff9a9e;
+    color: #ff9a9e;
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+}
+
+.clear-button:hover {
+    background: #ff9a9e;
+    color: #fff;
+}
+
+/* 加载动画 */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.loading-overlay.show {
+    display: flex;
+}
+
+.loading-content {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.loading-dog {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1rem;
+    position: relative;
+}
+
+.loading-dog-body {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #8B4513, #A0522D);
+    border-radius: 50%;
+    position: relative;
+    animation: loadingBounce 1s ease-in-out infinite;
+}
+
+@keyframes loadingBounce {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(5deg); }
+}
+
+.loading-dog-head {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #8B4513, #A0522D);
+    border-radius: 50%;
+}
+
+.loading-dog-ears {
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+}
+
+.loading-ear {
+    width: 15px;
+    height: 20px;
+    background: #654321;
+    border-radius: 50% 50% 0 0;
+    animation: earWiggle 0.5s ease-in-out infinite alternate;
+}
+
+.loading-ear:nth-child(2) {
+    animation-delay: 0.25s;
+}
+
+@keyframes earWiggle {
+    0% { transform: rotate(-5deg); }
+    100% { transform: rotate(5deg); }
+}
+
+.loading-dog-face {
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 30px;
+}
+
+.loading-dog-eyes {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.loading-eye {
+    width: 8px;
+    height: 8px;
+    background: #000;
+    border-radius: 50%;
+    animation: loadingBlink 1.5s infinite;
+}
+
+@keyframes loadingBlink {
+    0%, 80%, 100% { opacity: 1; }
+    90% { opacity: 0; }
+}
+
+.loading-dog-tail {
+    position: absolute;
+    bottom: -5px;
+    right: -10px;
+    width: 20px;
+    height: 30px;
+    background: #8B4513;
+    border-radius: 50% 50% 0 0;
+    animation: tailWag 0.8s ease-in-out infinite;
+}
+
+@keyframes tailWag {
+    0%, 100% { transform: rotate(-10deg); }
+    50% { transform: rotate(10deg); }
+}
+
+.loading-text {
+    color: #666;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+/* 错误提示 */
+.error-toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #ff6b6b;
+    color: #fff;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+    transform: translateX(400px);
+    transition: transform 0.3s ease;
+    z-index: 1001;
+}
+
+.error-toast.show {
+    transform: translateX(0);
+}
+
+.error-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.error-icon {
+    font-size: 1.2rem;
+}
+
+.error-message {
+    font-weight: 500;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .container {
+        margin: 0;
+        border-radius: 0;
+    }
+    
+    .header {
+        padding: 0.75rem 1rem;
+    }
+    
+    .logo h1 {
+        font-size: 1.4rem;
+    }
+    
+    .dog-avatar {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .message-content {
+        max-width: 85%;
+    }
+    
+    .input-container {
+        padding: 0.75rem;
+    }
+    
+    .loading-content {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+}
+
+/* 打字机效果 */
+.typing {
+    border-right: 2px solid #ff9a9e;
+    animation: blink-caret 0.75s step-end infinite;
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: #ff9a9e; }
+} 
