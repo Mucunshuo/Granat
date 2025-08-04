@@ -1,6 +1,10 @@
 import torch
 import logging
 from transformers import AutoTokenizer, AutoModelForCausalLM
+try:
+    from transformers import Qwen3Tokenizer
+except ImportError:
+    from transformers.models.qwen3 import Qwen3Tokenizer
 from peft import PeftModel
 from typing import Optional, Dict, Any
 import time
@@ -168,4 +172,4 @@ def cleanup_model():
     global _model_loader
     if _model_loader is not None:
         _model_loader.unload_model()
-        _model_loader = None 
+        _model_loader = None
